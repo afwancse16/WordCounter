@@ -8,7 +8,7 @@
     </div>
       <button type="submit" [disabled]="didsubmit" (click)="submit()" class="btn btn-primary btn-lg" style="margin-right: 10px;">Submit</button>
       <button type="reset" [disabled]="didsubmit" class="btn btn-dark btn-lg" style="margin-right: 10px;">Clear</button>
-      <button type="button" (click)="didsubmit = false; istextthere = false; inputstring = null; isinvalid=false;" class="btn btn-danger btn-lg">Reset All</button>
+      <button type="button" (click)="didsubmit = false; istextthere = false; inputstring = null;" class="btn btn-danger btn-lg">Reset All</button>
     </form>
     <div style="margin-top: 15px;" *ngIf="didsubmit">
         <app-count [inputstr]="inputstring"></app-count>
