@@ -1,11 +1,12 @@
-<div *ngIf="isvalid">
+<div *ngIf="isfromurl">
+  <h5>The text returned from the above url is:</h5>
+  <p class="list-group-item">{{output.Inputstring}}</p>
+</div>
+
+<div  *ngIf="output">
   <h5>The top ten strings used in the above are:</h5>
 
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let item of outputarray">{{item[0]}} : {{item[1]}}</li>
+    <li class="list-group-item" *ngFor="let item of output.OutputArray">{{item[0]}} : {{item[1]}}</li>
   </ul>
-</div>
-
-<div *ngIf="!isvalid">
-  <h5 [style.color]="'red'">Please Enter a valid string</h5>
 </div>

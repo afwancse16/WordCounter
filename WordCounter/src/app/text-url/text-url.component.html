@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="jumbotron">
+    <form (ngSubmit)="submit()" [formGroup]="textUrlForm">
+      <div class="form-group">
+        <label for="text">Enter the url here:</label>
+        <input type="text" class="form-control" id="text" [ngClass]="{'invalid' : !didsubmit && (textUrlForm.get('inputstr').touched && !textUrlForm.get('inputstr').valid) || !isvalidstring || responseError}"
+          formControlName="inputstr">
+        <p *ngIf="(textUrlForm.get('inputstr').touched && !textUrlForm.get('inputstr').valid) && !didsubmit && !responseError" style="color: red;">Text is required</p>
+        <p *ngIf="!(textUrlForm.get('inputstr').touched && !textUrlForm.get('inputstr').valid) && !isvalidstring" style="color: red;">Please enter a valid input</p>
+        <p *ngIf="responseError" style="color: red;">{{responseError}}</p>
+      </div>
+      <button type="submit" [disabled]="didsubmit || !textUrlForm.valid" class="btn btn-primary btn-lg" style="margin-right: 10px;">Submit</button>
+      <button type="reset" [disabled]="didsubmit" class="btn btn-dark btn-lg" style="margin-right: 10px;">Clear</button>
+      <button type="button" (click)="resetForm()" class="btn btn-danger btn-lg" style="margin-right: 10px;">Reset All</button>
+      <button type="button" [disabled]="didsubmit || checkVisiblity()" (click)="gotopreviousvalue()" class="btn btn-success btn-lg">Previous Input</button>
+    </form>
+    <div style="margin-top: 15px;" *ngIf="didsubmit">
+      <app-count [output]="output" [isfromurl]= "'true'"></app-count>
+    </div>
+  </div>
+</div>

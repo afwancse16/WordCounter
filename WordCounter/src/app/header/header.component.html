@@ -1,5 +1,13 @@
 <nav class="navbar navbar-dark bg-dark mb-5">
   <a class="navbar-brand" href="/">Word Counter</a>
+  <div class="navbar-expand mr-auto">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/text" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        true}">Input Text</a>
+      <a class="nav-item nav-link" routerLink="/url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+        true}">Input Url</a>
+    </div>
+  </div>
   <div class="navbar-expand ml-auto navbar-nav">
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="https://github.com/afwancse16/WordCounter" target="_blank">

@@ -1,17 +1,21 @@
 <div class="container">
   <div class="jumbotron">
-    <form>
-    <div class="form-group">
-      <label for="text">Enter the text here:</label>
-      <textarea [(ngModel)]="inputstring" name="text" class="form-control" rows="5" id="text" [disabled]="didsubmit"></textarea>
-      <p *ngIf="istextthere" style="color: red;">Text is required</p>
-    </div>
-      <button type="submit" [disabled]="didsubmit" (click)="submit()" class="btn btn-primary btn-lg" style="margin-right: 10px;">Submit</button>
+    <form (ngSubmit)="submit()" [formGroup]="textForm">
+      <div class="form-group">
+        <label for="text">Enter the text here:</label>
+        <textarea class="form-control" rows="5" id="text" [ngClass]="{'invalid' : !didsubmit && (textForm.get('inputstr').touched && !textForm.get('inputstr').valid) || !isvalidstring }"
+          formControlName="inputstr"></textarea>
+        <p *ngIf="(textForm.get('inputstr').touched && !textForm.get('inputstr').valid) && !didsubmit" style="color: red;">Text is required</p>
+        <p *ngIf="!(textForm.get('inputstr').touched && !textForm.get('inputstr').valid) && !isvalidstring" style="color: red;">Please enter a valid input</p>
+        <p>Letter Count : {{lengthcount}}</p>
+      </div>
+      <button type="submit" [disabled]="didsubmit || !textForm.valid" class="btn btn-primary btn-lg" style="margin-right: 10px;">Submit</button>
       <button type="reset" [disabled]="didsubmit" class="btn btn-dark btn-lg" style="margin-right: 10px;">Clear</button>
-      <button type="button" (click)="didsubmit = false; istextthere = false; inputstring = null;" class="btn btn-danger btn-lg">Reset All</button>
+      <button type="button" (click)="resetForm()" class="btn btn-danger btn-lg" style="margin-right: 10px;">Reset All</button>
+      <button type="button" [disabled]="didsubmit || checkVisiblity()" (click)="gotopreviousvalue()" class="btn btn-success btn-lg">Previous Input</button>
     </form>
     <div style="margin-top: 15px;" *ngIf="didsubmit">
-        <app-count [inputstr]="inputstring"></app-count>
+      <app-count [output]="output"></app-count>
     </div>
   </div>
 </div>
