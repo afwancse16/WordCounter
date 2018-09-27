@@ -9,7 +9,7 @@
           formControlName="inputstr">
 
         <p *ngIf="(textUrlForm.get('inputstr').touched && !textUrlForm.get('inputstr').valid) && !didsubmit && !responseError" style="color: red;">Text is required</p>
-        <p *ngIf="!(textUrlForm.get('inputstr').touched && !textUrlForm.get('inputstr').valid) && !isvalidstring" style="color: red;">Please enter a valid input</p>
+        <p *ngIf="!isvalidstring" style="color: red;">Please enter a valid input</p>
         <p *ngIf="responseError" style="color: red;">{{responseError}}</p>
       </div>
 

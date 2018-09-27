@@ -26,6 +26,9 @@ export class TextComponent implements OnInit {
 
     this.textForm.get('inputstr').valueChanges.subscribe((data: string) => {
       this.lengthcount = data ? data.length : 0;
+      if (!this.lengthcount) {
+        this.isvalidstring = true;
+      }
     });
   }
 

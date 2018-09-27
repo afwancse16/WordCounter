@@ -9,7 +9,7 @@
           formControlName="inputstr"></textarea>
 
         <p *ngIf="(textForm.get('inputstr').touched && !textForm.get('inputstr').valid) && !didsubmit" style="color: red;">Text is required</p>
-        <p *ngIf="!(textForm.get('inputstr').touched && !textForm.get('inputstr').valid) && !isvalidstring" style="color: red;">Please enter a valid input</p>
+        <p *ngIf="!isvalidstring" style="color: red;">Please enter a valid input</p>
         <p>Letter Count : {{lengthcount}}</p>
       </div>
 

@@ -30,6 +30,12 @@ export class TextUrlComponent implements OnInit {
     this.textUrlForm = this.fb.group({
       inputstr: ['', Validators.required]
     });
+
+    this.textUrlForm.get('inputstr').valueChanges.subscribe((data: string) => {
+      if (!data.length) {
+        this.isvalidstring = true;
+      }
+    });
   }
 
   public submit() {
