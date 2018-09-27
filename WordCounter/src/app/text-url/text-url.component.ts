@@ -23,6 +23,8 @@ export class TextUrlComponent implements OnInit {
   // for app-count component
   output: StoreText;
 
+  lengthcount = 0;
+
   constructor(private fb: FormBuilder, private countService: CountService) { }
 
   ngOnInit() {
@@ -32,7 +34,8 @@ export class TextUrlComponent implements OnInit {
     });
 
     this.textUrlForm.get('inputstr').valueChanges.subscribe((data: string) => {
-      if (!data.length) {
+      this.lengthcount = data ? data.length : 0;
+      if (!this.lengthcount) {
         this.isvalidstring = true;
       }
     });
@@ -44,20 +47,24 @@ export class TextUrlComponent implements OnInit {
       this.inputUrl = this.textUrlForm.get('inputstr').value;
       this.isvalidstring = this.inputUrl.trim().length ? true : false;
       if (this.isvalidstring) {
-        this.countService.getTextFromUrl(this.inputUrl).subscribe(data => {
-          this.nextStep(data);
-        },
-          (err: HttpErrorResponse) => {
-            if (err.status.toString().indexOf('4') !== -1) {
-              this.responseError = 'Please check the url';
-            } else if (err.status.toString().indexOf('5') !== -1) {
-              this.responseError = 'Server Error';
-            } else {
-              this.responseError = 'Something went wrong. Please try again.';
-            }
-          });
+        this.callApi();
       }
     }
+  }
+
+  private callApi() {
+    this.countService.getTextFromUrl(this.inputUrl).subscribe(data => {
+      this.nextStep(data);
+    },
+      (err: HttpErrorResponse) => {
+        if (err.status.toString().indexOf('4') !== -1) {
+          this.responseError = 'Please check the url';
+        } else if (err.status.toString().indexOf('5') !== -1) {
+          this.responseError = 'Server Error';
+        } else {
+          this.responseError = 'Something went wrong. Please try again.';
+        }
+      });
   }
 
   private nextStep(data: string) {
