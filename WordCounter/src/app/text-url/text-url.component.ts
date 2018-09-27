@@ -58,7 +58,7 @@ export class TextUrlComponent implements OnInit {
     const arr = this.countService.validateInputandreturnarray(data.replace(/(<([^>]+)>)/ig, ''));
     if (arr.length) {
       this.countService.sortedArrayfromObject(arr, 10, eType.Url, data, this.inputUrl);
-      this.output = this.countService.outputarray.filter(i => i.Type === eType.Url)[0];
+      this.output = this.countService.getOutputArray(eType.Url)[0];
     } else {
       this.isvalidstring = false;
     }
@@ -75,10 +75,10 @@ export class TextUrlComponent implements OnInit {
     this.responseError = null;
   }
 
-  public checkVisiblity = () => this.countService.outputarray.findIndex(i => i.Type === eType.Url) === -1 ? true : false;
+  public checkVisiblity = () => this.countService.getOutputArray(eType.Url).length < 1 ? true : false;
 
   public gotopreviousvalue() {
-    const data = this.countService.outputarray.filter(i => i.Type === eType.Url)[0];
+    const data = this.countService.getOutputArray(eType.Url)[0];
     this.textUrlForm.get('inputstr').patchValue(data.Url);
     this.output = data;
     this.didsubmit = true;

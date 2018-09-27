@@ -9,7 +9,7 @@ import { StoreText, eType } from './Model';
 })
 export class CountService {
 
-  public outputarray: StoreText[] = [];
+  private outputarray: StoreText[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -18,6 +18,8 @@ export class CountService {
       map((data: any) => data.text_out)
     );
   }
+
+  public getOutputArray = (type: eType) => this.outputarray.filter(i => i.Type === type);
 
   public validateInputandreturnarray(inputstr: string) {
     // checking whether the input string is undefined or not.

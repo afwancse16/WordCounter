@@ -37,7 +37,7 @@ export class TextComponent implements OnInit {
         const arr = this.countService.validateInputandreturnarray(this.inputstring);
         if (arr.length) {
           this.countService.sortedArrayfromObject(arr, 10, eType.Text, this.inputstring);
-          this.output = this.countService.outputarray.filter(i => i.Type === eType.Text)[0];
+          this.output = this.countService.getOutputArray(eType.Text)[0];
         } else {
           this.isvalidstring = false;
         }
@@ -55,10 +55,10 @@ export class TextComponent implements OnInit {
     this.isvalidstring = true;
   }
 
-  public checkVisiblity = () => this.countService.outputarray.findIndex(i => i.Type === eType.Text) === -1 ? true : false;
+  public checkVisiblity = () => this.countService.getOutputArray(eType.Text).length < 1 ? true : false;
 
   public gotopreviousvalue() {
-    const data = this.countService.outputarray.filter(i => i.Type === eType.Text)[0];
+    const data = this.countService.getOutputArray(eType.Text)[0];
     this.textForm.get('inputstr').patchValue(data.Inputstring);
     this.output = data;
     this.didsubmit = true;

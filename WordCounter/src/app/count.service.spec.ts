@@ -17,35 +17,23 @@ describe('CountService', () => {
 
   const arr = ['hey', 'hey', 'how', 'are'];
 
-  it('Testing sortedArrayfromObject method : should have length of outputarray as 2 if we pass one from text input and another from url.',
-    inject([CountService], (service: CountService) => {
-      service.outputarray = [];
-
-      service.sortedArrayfromObject(arr, 10, eType.Text, 'hey hey how are you?');
-      service.sortedArrayfromObject(arr, 10, eType.Text, 'hey hey how are you?', 'api/gettext');
-
-      expect(service.outputarray.length).toBe(eType.Text);
-
-    }));
-
   it('Testing sortedArrayfromObject method :should have length of outputarray as 1 if we pass two or more input from text box.',
     inject([CountService], (service: CountService) => {
-      service.outputarray = [];
+      service.getOutputArray(eType.Text);
 
       service.sortedArrayfromObject(arr, 10, eType.Text, 'hey hey how are you?');
       service.sortedArrayfromObject(arr, 10, eType.Text, 'hey hey how are you?');
       service.sortedArrayfromObject(arr, 10, eType.Text, 'hey hey how are you?');
 
-      expect(service.outputarray.length).toBe(1);
+      expect(service.getOutputArray(eType.Text).length).toBe(1);
 
     }));
 
   it('Testing sortedArrayfromObject method : should have 2 occurences of "hey" in outputarray.', inject([CountService], (service: CountService) => {
-    service.outputarray = [];
 
     service.sortedArrayfromObject(arr, 10, eType.Text, 'hey hey how are you?');
 
-    expect(service.outputarray[0].OutputArray.filter(i => i[0] === 'hey')[0][1]).toBe(2);
+    expect(service.getOutputArray(eType.Text)[0].OutputArray.filter(i => i[0] === 'hey')[0][1]).toBe(2);
 
   }));
 
